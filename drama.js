@@ -2,7 +2,7 @@
     try {
         const db_des = './db/drama.json'
         let db = require(db_des) 
-        const keys = require('./config.json').line.notify
+        const config = require('./config.json')
         const ptt_crawler = require('@waynechang65/ptt-crawler')
         const Promise = require('bluebird')
         const fs = require('fs-extra')
@@ -19,7 +19,7 @@
                 },
                 json : true
             }
-            const result = await Promise.map(keys, (key) => {
+            const result = await Promise.map(config.line.notify, (key) => {
                 options.headers.Authorization = `Bearer ${key}`
                 return request(options)
             })             
@@ -27,15 +27,16 @@
         }
 
         const inspect = async () => {
+            db = []
             await ptt_crawler.initialize({
                 headless : true,
                 args : ["--proxy-server='direct://'", '--proxy-bypass-list=*']
             })
             const dramas = await ptt_crawler.getResults({
-                    board: 'drama-ticket',
-                    pages: 1,
-                    skipPBs: true,
-                    getContents: false
+                    board : config.ptt.board,
+                    pages : 1,
+                    skipPBs : true,
+                    getContents : false
                 }).then((result) => {
                     return Promise.map(result.titles, (title, index) => {
                         return {
@@ -48,13 +49,14 @@
                     })
                 })
             await ptt_crawler.close()
-            const targets = ['李宗盛', '有歌之年']
+            const targets_or = config.ptt.targets_or
+            const targets_and = config.ptt.targets_and
     
             const filter_by_target = dramas.reduce((array, drama) => {
-                    if (targets.some((target) => {return drama.title.includes(target)})){
-                        // if (drama.title.includes('換票')){
-                        // }
-                        array.push(drama)
+                    if (targets_or.some((target) => {return drama.title.includes(target)})){
+                        if (targets_and.every((target) => {return drama.title.includes(target)})){
+                            array.push(drama)
+                        }
                     }
                     return array
                 }, [])
@@ -70,8 +72,6 @@
             await Promise.map(filter_by_db, (drama) => {
                 return line_notify(drama.title + '\n' + drama.author + '\n' + drama.url)
             })
-            // await fs.outputJson(db_des, filter_by_target)
-            // console.log(filter_by_target)
             console.log(filter_by_db)
         }
 

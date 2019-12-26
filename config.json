@@ -1,17 +1,10 @@
 {
-    "sino" : {
-        "id" : ["L124727866", "L124727867"],
-        "code" : ["TLH1", "TLH2"]
-    },
-    "momo" : {
-        "code" : ["M20190801033,D20190801001,taish", "M20190801033,D20190801002,taish1000"]
-    },
     "line" : {
         "notify" : ["dgG1XG98iL2YIQCpYDJFlFSaITxsUNPMvjnwuWpJD5k"]
     },
-    "shopee" : {
-        "csrftoken" : ["gVsOG94XMPF4Wb4uJlIzWNbUGZFqE65d"],
-        "referer" : "https://shopee.tw/m/vouchers-3",
-        "voucher" : ["46890100,9429a8a3750a729952a4c5d5401df54c2e9e21d0dffafe67116a5c94f3113384", "46133546,acc38a62c0e467522e8df7f8fe1ae7acabc240d4f0d39c8e788f3bb44048fbd1"]
+    "ptt" : {
+        "board" : "drama-ticket",
+        "targets_or" : ["李宗盛", "有歌之年"],
+        "targets_and" : ["售"]
     }
 }
