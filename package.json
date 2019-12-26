@@ -1,0 +1,27 @@
+{
+  "name": "ptt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryuichl/ptt-crawler.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryuichl/ptt-crawler/issues"
+  },
+  "homepage": "https://github.com/ryuichl/ptt-crawler#readme",
+  "dependencies": {
+    "@waynechang65/ptt-crawler": "github:ryuichl/ptt-crawler",
+    "bluebird": "^3.7.2",
+    "cron": "^1.7.2",
+    "fs-extra": "^8.1.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.5"
+  }
+}
